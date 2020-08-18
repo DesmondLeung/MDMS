@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表格布局</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <style>
+        body
+        {
+            background-color:#f2f2f2;
+        }
+        h1
+        {
+            color:cornflowerblue;
+            text-align:left;
+            flaot :left;
+            margin:300px;
+
+        }
+        p
+        {
+            font-family:"Times New Roman";
+            font-size:30px;
+        }
+        div3{
+            float:left;
+            margin:18px; /* 这个15px就是对于表格左右bai留出15像素的空间 */
+        }
+        div1{
+            float:left;
+            margin:18px; /* 这个15px就是对于表格左右bai留出15像素的空间 */
+        }
+        div2{
+            float:left;
+            margin:18px; /* 这个15px就是对于表格左右bai留出15像素的空间 */
+        }
+    </style>
+
+    <script type="text/javascript" src="index.js"></script>
+<!--    <script>-->
+<!--        function show_borrow_device(){-->
+<!--            document.getElementById("borrow_device").style.backgroundColor='#696969';-->
+
+<!--        }-->
+<!--    </script>-->
+</head>
+
+<body>
+
+<table width="100%" bgcolor="#f2f2f2">
+    <!--页头-->
+    <tr height="80px" bgcolor="#14191e">
+        <td></td>
+    </tr>
+    <!--上空行-->
+    <tr height="10px">
+        <td></td>
+    </tr>
+    <!--内容-->
+    <tr>
+        <td>
+            <table align="left" width="1024px">
+                <tr>
+                    <td width="240px"   valign="top">
+                        <table width="100%" bgcolor="#b0c4de">
+                            <tr><td align="center" height="60px"><button
+                                    id="borrow_device" name="borrow_device"
+                                    onClick="show_borrow_device()"
+                                    style="outline:none;bborder-width:0px;width:240px;padding:20px;font: bold 18px sans-serif;background:transparent" >借用设备</button></td></tr>
+                            <tr><td align="center" height="60px"><button
+                                    id="mange_device" name="mange_device"
+                                    onClick="show_manage_device()"
+                                    style="outline:none;border-width:0px;width:240px;padding:20px;font: bold 18px sans-serif;background:transparent">管理设备</button></td></tr>
+                        </table>
+                    </td> <!--左内容-->
+                    <td width="20px"></td> <!--空隙-->
+                    <td width="764px" bgcolor="#ffffff">
+                        <div1 class="typediv1",id = typediv1>
+                            <button id="borrow_device_btn" name="borrow_device_btn"
+                                    onClick="borrow_device()"
+                                    style="margin-left:10px;margin-top:10px;width:100px;padding:10px;font: bold 18px sans-serif;background: darkgray" >
+                                借用设备</button>
+
+                            <button id="return_device_btn" name="return_device_btn"
+                                    onClick="return_device()"
+                                    style="margin-left:10px;margin-top:10px;width:100px;padding:10px;font: bold 18px sans-serif;background: darkgray" >
+                                归还设备</button>
+
+                            <button id="list_device_btn2" name="list_device_btn2"
+                                    onClick="list_device()"
+                                    style="margin-left:10px;margin-top:10px;width:150px;padding:10px;font: bold 18px sans-serif;background: darkgray">
+                                刷新设备列表</button>
+                        </div1>
+                        <div2 class="typediv2",id =typediv2>
+                            <button id="add_device_btn" name="add_device_btn" onClick="add_device()"
+                                    style="margin-left:10px;margin-top:10px;width:100px;padding:10px;font: bold 18px sans-serif;background: darkgray" >
+                                添加设备</button>
+
+                            <button id="modify_device_btn" name="modify_device_btn" onClick="modify_device()"
+                                    style="margin-left:10px;margin-top:10px;width:100px;padding:10px;font: bold 18px sans-serif;background: #cacaca" >
+                                修改设备</button>
+
+                            <button id="del_device_btn" name="del_device_btn" onClick="del_device()"
+                                    style="margin-left:10px;margin-top:10px;width:100px;padding:10px;font: bold 18px sans-serif;background: #cacaca" >
+                                删除设备</button>
+
+                            <button id="list_device_btn" name="list_device_btn" onClick="list_device()"
+                                    style="margin-left:10px;margin-top:10px;width:150px;padding:10px;font: bold 18px sans-serif;background: #cacaca">
+                                刷新设备列表</button>
+                        </div2>
+                        <div3 class="table_listdevice",id = device_table>
+                            <table id="list_table" width="600" border="1"
+                                   cellspacing="0"
+                                   cellpadding="10"
+                                   bgcolor="#dcdcdc" aligin="center">
+                                <thead>
+                                <tr bgcolor="#808080" align="center">
+                                    <td width="200">ID</td>
+                                    <td width="200">设备名称</td>
+                                    <td width="200">系统</td>
+                                    <td width="200">版本</td>
+                                    <td width="200">状态</td>
+                                </tr>
+                                <thead/>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div3>
+
+
+
+                    </td> <!--右内容:单元格宽度的和=表格宽度1024px-->
+            </table>
+
+        </td>
+    </tr>
+<!--    &lt;!&ndash;下空行&ndash;&gt;-->
+<!--    <tr height="10px">-->
+<!--        <td></td>-->
+<!--    </tr>-->
+<!--    &lt;!&ndash;页脚&ndash;&gt;-->
+<!--    <tr height="150px" bgcolor="#14191e">-->
+<!--        <td>111</td>-->
+<!--    </tr>-->
+</table>
+<script>window.onload = show_borrow_device()</script>
+<script>window.onload = list_device()</script>
+</body>
+</html>

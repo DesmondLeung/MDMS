@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>移动设备管理系统</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+
+<!--    <style type="text/css">-->
+<!--        div{-->
+<!--            float:left;-->
+<!--            margin:0 100px; /* 这个15px就是对于表格左右bai留出15像素的空间 */-->
+<!--        }-->
+<!--    </style>-->
+<!---->
+    <style>
+        h1
+        {
+            color:cornflowerblue;
+            text-align:left;
+            flaot :left;
+            margin:0 300px;
+
+        }
+        p
+        {
+            font-family:"Times New Roman";
+            font-size:30px;
+        }
+    </style>
+<!--    <script>-->
+<!--        window.onload = function (){-->
+<!--            var url = "http://localhost:8000/api/mgr/devices";-->
+<!--            var request = new XMLHttpRequest();-->
+<!--            request-->
+
+<!--        }-->
+<!--    </script>-->
+</head>
+<body>
+    <script>
+        window.total=0;
+
+        function draw_table(json,num)
+        {
+            var tr;
+            for (var i = num; i < json.length; i++) {
+                tr = $('<tr/>');
+                tr.append("<td>" + json[i].id + "</td>");
+                tr.append("<td>" + json[i].devicename + "</td>");
+                tr.append("<td>" + json[i].devicesystem + "</td>");
+                tr.append("<td>" + json[i].deviceversion + "</td>");
+                tr.append("<td>" + json[i].devicestate + "</td>");
+                $('table').append(tr);
+            }
+
+        }
+
+        function list_device()
+        {
+            var httpRequest = new XMLHttpRequest();
+            var url =
+                'http://localhost:8000/api/mgr/devices?action=list_device&pagesize=10&&pagenum=1';
+            httpRequest.open('GET', url, true);//第二步：打开连接  将请求参数写在url中  ps:"./Ptest.php?name=test&nameone=testone"
+            httpRequest.send();//第三步：发送请求  将请求参数写在URL中
+            /**
+             * 获取数据后的处理程序
+             */
+            httpRequest.onreadystatechange = function () {
+                if (httpRequest.readyState == 4 && httpRequest.status == 200) {
+                    var json = httpRequest.responseText;//获取到json字符串，还需解析
+                    console.log(json);
+                    var msg=eval("("+json+")");
+                    var total = msg.total;
+                    if(msg.ret='0' && (total>window.total)){
+                        var devices = msg.retlist;
+                        var newnum = Number(window.total);
+                        draw_table(devices,newnum)
+                        window.total = total
+                    }
+
+                    }
+                }
+            }
+
+
+        function add_device()
+        {
+
+        }
+
+        function modify_device()
+        {
+
+        }
+
+        function del_device()
+        {
+
+        }
+
+
+    </script>
+    <script>window.onload = list_device()</script>
+    <h1>移动设备管理系统</h1>
+    <p> </p>
+    <button id="add_device" name="add_device" onClick="add_device()"
+            style="margin-left:10px;margin-top:10px;width:100px;padding:10px;font: bold 18px sans-serif;background: lightcyan" >
+        添加设备</button>
+
+    <button id="modify_device" name="modify_device" onClick="modify_device()"
+            style="margin-left:10px;margin-top:10px;width:100px;padding:10px;font: bold 18px sans-serif;background: lightcyan" >
+        修改设备</button>
+
+    <button id="del_device" name="del_device" onClick="del_device()"
+            style="margin-left:10px;margin-top:10px;width:100px;padding:10px;font: bold 18px sans-serif;background: lightcyan" >
+        删除设备</button>
+
+    <button id="list_device" name="list_device" onClick="list_device()"
+            style="margin-left:10px;margin-top:10px;width:150px;padding:10px;font: bold 18px sans-serif;background: lightcyan">
+        刷新设备列表</button>
+
+    <p> </p>
+    <div class="table_listdevice">
+        <table width="800" border="1" cellspacing="0" cellpadding="10"
+               bgcolor="#f0f8ff" aligin="center">
+            <tr bgcolor="#add8e6" align="center">
+                <td width="200">ID</td>
+                <td width="200">设备名称</td>
+                <td width="200">系统</td>
+                <td width="200">版本</td>
+                <td width="200">状态</td>
+            </tr>
+        </table>
+    </div>
+
+
+</body>
+</html>
